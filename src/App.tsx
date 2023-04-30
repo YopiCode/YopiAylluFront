@@ -1,10 +1,17 @@
-import { useState } from 'react'
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { routes } from './routes'
+import { Welcome, Register } from './pages'
 
 function App() {
 
   return (
-    <h1>Wenasss</h1>
+    <BrowserRouter>
+      <Routes>
+        <Route path={routes.welcome} element={<Welcome />} />
+        <Route path={routes.register} element={<Register />} />
+        <Route path={routes.login} element={<Welcome />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

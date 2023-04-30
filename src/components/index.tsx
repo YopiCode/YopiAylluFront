@@ -1,0 +1,5 @@
+export { default as PrimaryButton } from './PrimaryButton'
+export { default as PhoneButton } from './PhoneButton'
+export { default as ImgButton } from './ImgButton'
+export { default as InputsForm } from './InputsForm'
+export { default as TextAreaForm } from './TextAreaForm'
