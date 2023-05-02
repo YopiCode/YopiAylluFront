@@ -4,6 +4,7 @@ const useSend = <T extends Object>(object: T) => {
     const [model, setModel] = useState(object)
     const handleChange = ({ target }: ChangeEvent<HTMLInputElement> & ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = target;
+        console.log(`${name} es ${typeof value}`)
         setModel({
             ...model,
             [name]: value

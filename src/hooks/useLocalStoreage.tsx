@@ -1,14 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-interface Local<Type> {
-    key: string,
-    initialValue?: Type
-}
-
-const useLocalStoreage = <Type extends Object>({
-    key,
-    initialValue
-}: Local<Type>) => {
+const useLocalStoreage = <Type extends Object>(
+    key:string,
+    initialValue?:Type
+) => {
 
     const [value, setValue] = useState(() => {
         try {

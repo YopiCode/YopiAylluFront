@@ -1,3 +1,7 @@
 export { default as Icon } from './icon.png'
-export { default as Welcome119 } from './119.jpg'
+export { default as Img119 } from './119.jpg'
 export { default as Return } from './back.png'
+export { default as ImgLogo } from './icon-bg.png'
+export { default as ImgExit } from './delete.png'
+export { default as ImgMenu } from './menu.png'
+export { default as ImgMore } from './more.png'
