@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { routes } from '../routes'
 import { ImgExit, ImgLogo, ImgMenu } from '../assets'
+import { PrimaryButton } from '.'
+import { useFamilyContext } from '../context/FamilyProvider'
 
 const NavWraper = () => {
     const navigate = useNavigate();
+
+
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
     const activeNavLink:
         | ((props: { isActive: boolean; isPending: boolean }) => string | undefined)
@@ -13,6 +17,11 @@ const NavWraper = () => {
 
     const closeMenu = () => {
         setIsMenuActive(false)
+    }
+
+    const exit = () => {
+        localStorage.removeItem('codigofamiliar');
+        navigate(routes.welcome)
     }
 
     return (
@@ -27,7 +36,7 @@ const NavWraper = () => {
                 <img src={ImgLogo} className='w-6' />
             </div>
             <div className={isMenuActive ? `fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-30 backdrop-blur` : ""}>
-                <aside className={`fixed top-0 left-0 z-40 w-4/6 h-screen transition-transform  ${isMenuActive ? "translate-x-0" : "-translate-x-full"}`}>
+                <aside className={`fixed top-0 left-0 z-40 sm:w-4/6 md:w-2/6 xl:w-1/6 h-screen transition-transform  ${isMenuActive ? "translate-x-0" : "-translate-x-full"}`}>
                     <div className='h-full px-3 bg-cyan-900'>
                         <div className='h-2/6'>
                             <button className='ml-auto mr-0 block' onClick={closeMenu}>
@@ -57,6 +66,9 @@ const NavWraper = () => {
                                 </li>
                                 <li>
                                     <NavLink to={routes.resources} className={activeNavLink} onClick={closeMenu} children="RECURSOS" />
+                                </li>
+                                <li>
+                                    <PrimaryButton onClick={exit} children='Salir' bg='btn-red' />
                                 </li>
                             </ul>
                         </div>

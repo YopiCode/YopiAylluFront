@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react"
 import { homeFamilia } from "../services/FamiliaService"
 import { EmptyHome, HomeModel } from "../models"
-import { ImgMore } from "../assets"
-
+import { AddButton, Table } from "../components"
+import { useNavigate } from "react-router-dom"
+import { routes } from "../routes"
+import { useFamilyContext } from "../context/FamilyProvider"
 
 
 const Home = () => {
   const [home, setHome] = useState<HomeModel>(EmptyHome)
+  const navigate = useNavigate();
+  const familia = useFamilyContext();
 
   useEffect(() => {
     getHome()
   }, [])
-
   const getHome = async () => {
-    await homeFamilia().then((data) => {
+    await homeFamilia(familia.codigofamiliar).then((data) => {
       setHome(data)
     }).catch(e => console.log(e))
   }
@@ -29,18 +32,11 @@ const Home = () => {
         <p className="text-center text-xl">{home.nombrefamilia}</p>
       </div>
       {home.integrantes.length == 0 ? (
-        <div>
-          <button>
-            <img src={ImgMore} />
-          </button>
-          <h2>
-            De "Click" para agregar un familiar
-          </h2>
-        </div>
+        <AddButton children="Familiar" onClick={() => navigate(routes.family)} />
       ) : (
         <div className="">
           <h2 className="text-4xl font-bold pb-6">Integrantes</h2>
-          <table className="w-full text-center bg-orange-300 rounded-3xl border-separate border-spacing-x-10">
+          <Table show={home.integrantes.length != 0} bg="table-orange">
             <tbody>
               {home.integrantes.map((item, i) => {
                 return (
@@ -51,7 +47,7 @@ const Home = () => {
                 )
               })}
             </tbody>
-          </table>
+          </Table>
         </div>
       )}
     </div>
