@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import { CroquisModel, CroquisModelResponse } from "../models";
+import { CroquisModel } from "../models";
 import { CroquisApi } from "../apis";
 
-export const registrarPiso =async (code:number, croquis: CroquisModelResponse) => {
-    const response: AxiosResponse<CroquisModel> = await axios.post(`${CroquisApi}/${code}`, croquis)
+export const registrarPiso =async (code:number, croquis: CroquisModel) => {
+    const response: AxiosResponse<Blob> = await axios.post(`${CroquisApi}/${code}`, croquis ,{responseType: "blob"})
     return response.data
 }
 

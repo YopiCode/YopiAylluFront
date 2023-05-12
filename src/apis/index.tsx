@@ -8,4 +8,5 @@ export const MyHomeApi = `${URL}hogar`
 export const ZoneApi = `${URL}zona`
 export const CroquisApi = `${URL}piso`
 export const PlanApi = `${URL}plan`
+export const PasoApi = `${PlanApi}/paso`
 export const BagApi = `${URL}producto`

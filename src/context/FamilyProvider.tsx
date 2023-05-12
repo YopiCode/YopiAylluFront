@@ -1,11 +1,10 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
-import { EmptyFamilia, FamiliaModel } from "../models";
 import useLocalStoreage from "../hooks/useLocalStoreage";
-import { useNavigate } from "react-router-dom";
-import { routes } from "../routes";
+import { EmptyFamiliaResponse, FamiliaResponse } from "../models/ResponseModels";
+import { InfoFamilia } from "../services/FamiliaService";
 
-const familiaContext = createContext<FamiliaModel>(EmptyFamilia);
-const voidFamilyContext = createContext(((familia: FamiliaModel) => { }));
+const familiaContext = createContext<FamiliaResponse>(EmptyFamiliaResponse);
+const voidFamilyContext = createContext(((familia: FamiliaResponse) => { }));
 
 export const useFamilyContext = () => useContext(familiaContext);
 export const useVoidFamilyContext = () => useContext(voidFamilyContext);
@@ -15,23 +14,30 @@ type PropsChatProvider = {
 }
 
 const FamilyProvider = ({ children }: PropsChatProvider) => {
-  const [codigo, setCodigo] = useLocalStoreage<number>("codigofamiliar", 0)
-  const init: FamiliaModel = {
-    ...EmptyFamilia,
-    codigofamiliar: codigo
-  };
-  const [familia, setFamilia] = useState<FamiliaModel>(init);
-  const navigate = useNavigate()
+  const [init, setInit] = useLocalStoreage<FamiliaResponse>("familia", EmptyFamiliaResponse)
 
-  // useEffect(() => {
-  //   if (familia.codigofamiliar === 0) {
-  //     navigate(routes.welcome)
-  //   }
-  // }, [])
-  const voidFamily = (familia: FamiliaModel) => {
+  const [familia, setFamilia] = useState<FamiliaResponse>(init);
+
+
+  const voidFamily = (familia: FamiliaResponse) => {
     setFamilia(familia)
-    setCodigo(familia.codigofamiliar)
+    setInit(familia)
   }
+
+
+  useEffect(() => {
+    getFamilia()
+  }, [])
+
+  const getFamilia = async () => {
+    await InfoFamilia(familia.codigofamiliar)
+      .then(data => {
+        setFamilia(data)
+        setInit(data)
+      })
+  }
+
+
   return (
     <familiaContext.Provider value={familia}>
       <voidFamilyContext.Provider value={voidFamily}>

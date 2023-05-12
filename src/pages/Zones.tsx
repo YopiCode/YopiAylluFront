@@ -5,10 +5,11 @@ import { useFamilyContext } from "../context/FamilyProvider"
 import { AddButton, InputsForm, Modal, Table, TdDelete, TdSingle, TextAreaForm, Thead } from "../components"
 import useModalActive from "../hooks/useModalActive"
 import Form from "../components/forms/Form"
+import { EmptyZonesResponse, ZonesResponse } from "../models/ResponseModels"
 
 
 const Zones = () => {
-    const [zones, setZones] = useState<Array<ZonesModel>>([EmptyZone])
+    const [zones, setZones] = useState<Array<ZonesResponse>>([EmptyZonesResponse])
     const [nombre, setNombre] = useState("")
     const [detalle, setDetalle] = useState("")
     const [tipo, setTipo] = useState("")
@@ -28,7 +29,6 @@ const Zones = () => {
 
     const addZonas = async () => {
         const zone: ZonesModel = {
-            id: 0,
             nombre: nombre,
             detalle: detalle,
             tipo: tipo

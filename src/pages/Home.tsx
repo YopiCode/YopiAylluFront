@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import { homeFamilia } from "../services/FamiliaService"
-import { EmptyHome, HomeModel } from "../models"
 import { AddButton, Table } from "../components"
-import { useNavigate } from "react-router-dom"
 import { routes } from "../routes"
+import { EmptyHome, HomeResponse } from "../models/ResponseModels"
+import { useNavigate } from "react-router-dom"
 import { useFamilyContext } from "../context/FamilyProvider"
 
 
 const Home = () => {
-  const [home, setHome] = useState<HomeModel>(EmptyHome)
+  const [home, setHome] = useState<HomeResponse>(EmptyHome)
+
   const navigate = useNavigate();
   const familia = useFamilyContext();
 

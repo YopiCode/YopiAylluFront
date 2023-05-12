@@ -1,7 +1,7 @@
 import { PhoneButton, PrimaryButton } from '../components'
 import { Icon, Img119 } from '../assets'
-import { useNavigate } from "react-router-dom";
 import { routes } from '../routes';
+import { useNavigate } from 'react-router-dom';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -9,8 +9,8 @@ const Welcome = () => {
     <>
       <div className='h-2/5'>
         <div className='flex justify-between mt-2 mx-4'>
-          <PrimaryButton children='Registrar' onClick={() => navigate(routes.register)} bg={'btn-yellow'}/>
-          <PrimaryButton children='Ingresar' onClick={() => navigate(routes.login)} bg={'btn-yellow'}/>
+          <PrimaryButton children='Registrar' onClick={() => navigate(routes.register)} bg={'btn-yellow'} />
+          <PrimaryButton children='Ingresar' onClick={() => navigate(routes.login)} bg={'btn-yellow'} />
         </div>
         <img src={Icon} alt='Logo' className='h-3/4 mx-auto mt-10' />
       </div>

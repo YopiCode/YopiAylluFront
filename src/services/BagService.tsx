@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from "axios"
 import { BagApi } from "../apis"
+import { ProductosResponse } from "../models/ResponseModels"
 import { ProductosModel } from "../models"
 
 export const queryAllProductos =async (code:number) => {
-    const response: AxiosResponse<Array<ProductosModel>> = await axios.get(`${BagApi}/${code}`)
+    const response: AxiosResponse<Array<ProductosResponse>> = await axios.get(`${BagApi}/${code}`)
     return response.data
 }
 
@@ -13,7 +14,7 @@ export const deleteProductos =async (id:number) => {
 }
 
 export const addProductos =async (code:number, producto: ProductosModel) => {
-    const response: AxiosResponse<ProductosModel> = await axios.post(`${BagApi}/${code}`, producto)
+    const response: AxiosResponse<ProductosResponse> = await axios.post(`${BagApi}/${code}`, producto)
     return response.data
 }
 

@@ -20,7 +20,7 @@ const NavWraper = () => {
     }
 
     const exit = () => {
-        localStorage.removeItem('codigofamiliar');
+        localStorage.removeItem('familia');
         navigate(routes.welcome)
     }
 

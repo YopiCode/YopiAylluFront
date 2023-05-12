@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useFamilyContext} from "../../context/FamilyProvider"
+import useLocalStoreage from "../../hooks/useLocalStoreage"
 
 type Props = {
     href: string
@@ -11,11 +12,6 @@ const ProtectedFamilia = ({href}:Props) => {
     if(familia.codigofamiliar === 0 ){
         return <Navigate to={href} replace />
     }
-    useEffect(()=>{
-        console.log(familia)
-    },[])
-    
-
     return <Outlet />
 }
 

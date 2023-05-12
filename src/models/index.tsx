@@ -5,33 +5,18 @@ export interface FamiliaModel {
     nombrefamilia: string,
 }
 
-export interface HomeModel {
-    codigofamiliar: number,
-    nombrefamilia: string,
-    integrantes: Array<IntegrantesModel>
-}
-
-export interface MyHomeModel {
-    codigofamiliar: number,
-    nombrefamilia: string,
-    cantidad: number,
-    lider: string
-}
 
 export interface ZonesModel {
-    id: number,
     nombre: string,
     detalle: string,
     tipo: string
 }
 
 export interface IntegrantesModel {
-    id: number,
     nombres: string,
     apellidos: string,
     dni: number,
     telefono: number,
-    lider: boolean,
     discapacitado: boolean,
     mascota: boolean,
     roles: string
@@ -39,68 +24,44 @@ export interface IntegrantesModel {
 
 
 export interface CroquisModel {
-    id: number,
-    piso: number,
-    mapa: string
-}
-
-export interface CroquisModelResponse {
-    id: number,
     piso: number,
     mapa: Array<number>
 }
 
+
 export interface ProductosModel {
-    id: number,
     nombre: string,
     fecha_caducidad: Date,
-    caducable: boolean,
-    disponible: boolean
+    caducable: boolean
 }
 
 export interface PlanesModel {
-    id: number,
-    nombre: string,
-    pasos: Array<PasosPlanes>
+    nombre: string
 }
 
-export interface PasosPlanes {
-    id: number,
-    paso: number,
+export interface PasosModel {
     detalle: string
 }
 
 export const EmptyPlanes: PlanesModel = {
-    id: 0,
-    nombre: "",
-    pasos: []
+    nombre: ""
 }
 
-export const EmptyPasos: PasosPlanes = {
-    id: 0,
-    paso: 0,
-    detalle: "",
+export const EmptyPasos: PasosModel = {
+    detalle: ""
 }
 
 export const EmptyProductos: ProductosModel = {
-    id: 0,
     nombre: "",
     fecha_caducidad: new Date(),
-    caducable: false,
-    disponible: false
+    caducable: false
 }
 
 export const EmptyCroquis: CroquisModel = {
-    id: 0,
     piso: 0,
-    mapa: ""
+    mapa: []
 }
 
-export const EmptyHome: HomeModel = {
-    codigofamiliar: 0,
-    nombrefamilia: "",
-    integrantes: []
-}
 
 export const EmptyFamilia: FamiliaModel = {
     codigofamiliar: 0,
@@ -110,26 +71,16 @@ export const EmptyFamilia: FamiliaModel = {
 }
 
 export const EmptyIntegrantes: IntegrantesModel = {
-    id: 0,
     nombres: "",
     apellidos: "",
     dni: 0,
     telefono: 0,
-    lider: false,
     discapacitado: false,
     mascota: false,
     roles: ""
 }
 
-export const EmptyMyHome: MyHomeModel = {
-    codigofamiliar: 0,
-    nombrefamilia: "",
-    cantidad: 0,
-    lider: ""
-}
-
 export const EmptyZone: ZonesModel = {
-    id: 0,
     nombre: "",
     detalle: "",
     tipo: ""

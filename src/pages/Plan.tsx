@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { EmptyPasos, EmptyPlanes, PasosPlanes, PlanesModel } from '../models'
+import { EmptyPasos, EmptyPlanes, PasosModel, PlanesModel } from '../models'
 import { AddButton, ImgButton, InputsForm, Modal, Title } from '../components'
 import useModalActive from '../hooks/useModalActive'
 import Form from '../components/forms/Form'
 import { addPasos, addPlanes, deletePasos, deletePlanes, queryAllPlanes } from '../services/PlanesService'
 import { useFamilyContext } from '../context/FamilyProvider'
 import { ImgExit, ImgMore } from '../assets'
+import { EmptyPasosResponse, EmptyPlanesResponse, PasosResponse, PlanesResponse } from '../models/ResponseModels'
 
 const Plan = () => {
-  const [planes, setPlanes] = useState<Array<PlanesModel>>([EmptyPlanes])
+  const [planes, setPlanes] = useState<Array<PlanesResponse>>([EmptyPlanesResponse])
   const [nombre, setNombre] = useState("")
   const [idplan, setIdPlan] = useState(0)
   const [openPasos, setOpenPasos] = useState(false)
@@ -16,14 +17,12 @@ const Plan = () => {
   const { activate: activate1, handleActiveModal: handleActiveModal1 } = useModalActive()
   const familia = useFamilyContext()
 
-  const [pasos, setPasos] = useState<Array<PasosPlanes>>([EmptyPasos])
+  const [pasos, setPasos] = useState<Array<PasosResponse>>([EmptyPasosResponse])
   const [detalle, setDetalle] = useState("")
 
 
   const addPaso = async () => {
-    const paso: PasosPlanes = {
-      id: 0,
-      paso: 0,
+    const paso: PasosModel= {
       detalle: detalle
     }
 
@@ -54,9 +53,7 @@ const Plan = () => {
 
   const addPlan = async () => {
     const plan: PlanesModel = {
-      id: 0,
-      nombre: nombre,
-      pasos: []
+      nombre: nombre
     }
     await addPlanes(familia.codigofamiliar, plan)
       .then(data => {

@@ -1,22 +1,25 @@
 import { Return } from "../assets"
 import { ImgButton, InputsForm, PrimaryButton, TextAreaForm } from "../components"
-import { useNavigate } from "react-router-dom";
 import { routes } from '../routes';
-import { EmptyFamilia, FamiliaModel } from "../models";
+import { FamiliaModel } from "../models";
 import { registrarFamilia } from "../services/FamiliaService";
 import Title from "../components/Titles/Title";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useVoidFamilyContext } from "../context/FamilyProvider";
 
 
 const Register = () => {
-  const navigate = useNavigate()
   const [codigo, setCodigo] = useState<number>(0);
   const [nombre, setNombre] = useState<string>("");
   const [direccion, setDireccion] = useState<string>("");
   const [contrasena, setContrasena] = useState<number>(0);
   const [confirm, setConfirm] = useState<number>(0);
-  const setFamilia = useVoidFamilyContext()
+
+
+  const navigate = useNavigate();
+  const setFamilia = useVoidFamilyContext();
+
   const addFamily = async () => {
     if (contrasena !== confirm) {
       alert("Las contraseñas no son iguales :v")
@@ -28,6 +31,8 @@ const Register = () => {
       direccion: direccion,
       nombrefamilia: nombre
     }
+
+    console.log(familia)
     await registrarFamilia(familia)
       .then((data) => {
         setFamilia(data)
@@ -36,6 +41,7 @@ const Register = () => {
       .catch(error => {
         alert(error.response.data.message)
       })
+    
   }
 
   return (
@@ -55,7 +61,6 @@ const Register = () => {
           <PrimaryButton children="Ingresar" content="2" onClick={() => navigate(routes.login)} bg={""} />
         </div>
       </div>
-      {/* <ModalError visible={activate} children="" onClose={handleActiveModal} /> */}
     </div>
   )
 }

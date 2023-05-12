@@ -1,18 +1,19 @@
 import { Icon, Return } from "../assets"
 import { ImgButton, InputsForm, PrimaryButton } from "../components"
-import { useNavigate } from "react-router-dom";
 import { routes } from '../routes';
 import { EmptyFamilia, FamiliaModel } from "../models";
 import { loginFamilia } from "../services/FamiliaService";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useVoidFamilyContext } from "../context/FamilyProvider";
 
 const Login = () => {
-    const navigate = useNavigate()
     const [codigo, setCodigo] = useState<number>(0);
     const [password, setPassword] = useState<number>(0);
 
-    const setFamilia = useVoidFamilyContext()
+
+    const navigate = useNavigate();
+    const setFamilia = useVoidFamilyContext();
 
     const login = async () => {
         const familia: FamiliaModel = {
@@ -22,6 +23,7 @@ const Login = () => {
         }
         await loginFamilia(familia)
             .then((data) => {
+                console.log(data)
                 setFamilia(data)
                 navigate(routes.home)
             })

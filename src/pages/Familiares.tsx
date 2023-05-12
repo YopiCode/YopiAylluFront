@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
-import { EmptyIntegrantes, IntegrantesModel } from "../models"
+import {  IntegrantesModel } from "../models"
 import { deleteIntegrante, getIntegrantesByCodigo, registerIntegrantes } from "../services/IntegrantesService"
 import { AddButton, InputsForm, Modal, Table, TdDelete, TdSingle, Thead, Title } from "../components"
 import { useFamilyContext } from "../context/FamilyProvider"
 import useModalActive from "../hooks/useModalActive"
 import Form from "../components/forms/Form"
 import CheckBoxForms from "../components/forms/CheckBoxForms"
+import { IntegranteResponse } from "../models/ResponseModels"
 
 
 
 const Family = () => {
-  const [integrantes, setIntegrantes] = useState<Array<IntegrantesModel>>([EmptyIntegrantes])
+  const [integrantes, setIntegrantes] = useState<Array<IntegranteResponse>>([])
   const [nombre, setNombre] = useState<string>("")
   const [apellidos, setApellidos] = useState<string>("")
   const [rol, setRol] = useState<string>("")
@@ -40,12 +41,10 @@ const Family = () => {
 
   const addIntegrante = async () => {
     const integrante: IntegrantesModel = {
-      id: 0,
       nombres: nombre,
       apellidos: apellidos,
       dni: dni,
       telefono: telefono,
-      lider: false,
       discapacitado: discapacitado,
       mascota: mascota,
       roles: rol

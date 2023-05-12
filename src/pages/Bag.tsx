@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import { AddButton, CheckBoxForm, InputsForm, Modal, Table, TdDelete, TdSingle, Title } from '../components'
-import { EmptyProductos, ProductosModel } from '../models'
+import { ProductosModel } from '../models'
 import { addProductos, deleteProductos, queryAllProductos, updateDisponible } from '../services/BagService'
 import { useFamilyContext } from '../context/FamilyProvider'
 import useModalActive from '../hooks/useModalActive'
 import Form from '../components/forms/Form'
+import { ProductosResponse } from '../models/ResponseModels'
 
 const Bag = () => {
-  const [productos, setProducto] = useState<Array<ProductosModel>>([EmptyProductos])
+  const [productos, setProducto] = useState<Array<ProductosResponse>>([])
   const [nombre, setNombre] = useState("")
   const [caducable, setCaducable] = useState(false)
-  const [fecha, setFecha] = useState(new Date())
+  const [fecha, setFecha] = useState(new Date(""))
   const { activate, handleActiveModal } = useModalActive()
   const familia = useFamilyContext()
 
@@ -21,7 +22,6 @@ const Bag = () => {
   const getAllProducts = async () => {
     await queryAllProductos(familia.codigofamiliar)
       .then(data => {
-        console.log(data)
         setProducto(data)
       })
   }
@@ -36,16 +36,16 @@ const Bag = () => {
 
   const addProducto = async () => {
     const producto: ProductosModel = {
-      id: 0,
       nombre: nombre,
       fecha_caducidad: fecha,
-      caducable: caducable,
-      disponible: false
+      caducable: caducable
     }
     await addProductos(familia.codigofamiliar, producto)
       .then(data => {
         handleActiveModal()
         setProducto(productos.concat(data))
+        setCaducable(false)
+        setFecha(new Date(""))
       })
   }
 
